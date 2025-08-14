@@ -1,0 +1,11 @@
+<h1 class="m-3">Lists</h1>
+
+<div id="lists" class="m-3">
+
+  <% @lists.each do |list| %>
+     <h4> <%= list.name %>  </h4>
+ <p><%= link_to "See details", list_path(list), class: "btn btn-primary" %></p>
+  <% end %>
+
+<%= link_to "➕Add list", new_list_path %>
+</div>

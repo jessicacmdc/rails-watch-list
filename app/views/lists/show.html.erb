@@ -1,0 +1,18 @@
+<div>
+  <h2>Movies</h2>
+  <ul>
+ <% @list_movies.each do |movie| %>
+  <li>
+    <%= movie.title %>
+    <%= movie.overview %>
+    <%= movie.poster_url %>
+    <%= movie.rating %>
+ </li>
+    <% end  %>
+  </ul>
+
+<%= simple_form_for [@list, @bookmark] do |f| %>
+  <%= f.input :comment%>
+  <%= f.association :movie, prompt: "Choose a movie" %>
+  <%= f.button :submit %>
+<% end %>
