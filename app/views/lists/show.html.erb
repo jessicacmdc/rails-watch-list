@@ -1,18 +1,15 @@
 <div>
-  <h2>Movies</h2>
+  <h2><%= @list.name %></h2>
   <ul>
- <% @list_movies.each do |movie| %>
+ <% @bookmarks.each do |bookmark| %>
   <li>
+    <% movie = bookmark.movie %>
     <%= movie.title %>
     <%= movie.overview %>
     <%= movie.poster_url %>
     <%= movie.rating %>
  </li>
-    <% end  %>
   </ul>
+   <% end  %>
 
-<%= simple_form_for [@list, @bookmark] do |f| %>
-  <%= f.input :comment%>
-  <%= f.association :movie, prompt: "Choose a movie" %>
-  <%= f.button :submit %>
-<% end %>
+<%= link_to "Add movie", new_list_bookmark_path(@list) %>
