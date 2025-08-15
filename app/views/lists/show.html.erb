@@ -1,15 +1,46 @@
-<div>
-  <h2><%= @list.name %></h2>
-  <ul>
- <% @bookmarks.each do |bookmark| %>
-  <li>
-    <% movie = bookmark.movie %>
-    <%= movie.title %>
-    <%= movie.overview %>
-    <%= movie.poster_url %>
-    <%= movie.rating %>
- </li>
-  </ul>
-   <% end  %>
+<div class="banner d-flex justify-content-center align-items-center text-center"
+     style="background: url('<%= asset_path("banner.jpg") %>') center/cover no-repeat; height: 300px;">
+  <div class="text-white">
+   <h2><%= @list.name %></h2>
+  </div>
+</div>
 
-<%= link_to "Add movie", new_list_bookmark_path(@list) %>
+<div class="container col-12 m-3 p-3">
+  <div class="row">
+<div class="col-9">
+  <h2><%= @list.name %></h2>
+   <div class="row">
+ <% @bookmarks.each do |bookmark| %>
+    <% movie = bookmark.movie %>
+    <div class="col-6">
+  <div class="card">
+    <img src="<%= movie.poster_url %>" class="card-img-top" alt="...">
+   <div class="card-body">
+    <div class="card-text">
+    <p class="fw-bold"><%= movie.title %></p>
+    <p><%= movie.overview %></p>
+    <p>Rating : <%= movie.rating %><p>
+    <p class="fst-italic"> <%= bookmark.comment%></p>
+    </div>
+     </div>
+     </div>
+     </div>
+   <% end  %>
+ </div>
+<%= link_to "Back", lists_path %>
+      </div>
+
+<div class="dropdown col-3">
+  <button class="btn btn-success dropdown-toggle text-white" type="button" id="addMovieDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    +Add movie
+  </button>
+  <div class="dropdown-menu p-3" aria-labelledby="addMovieDropdown">
+    <%= simple_form_for [@list, @bookmark] do |f| %>
+    <%= f.input :comment%>
+    <%= f.association :movie, prompt: "Choose a movie" %>
+    <%= f.button :submit %>
+    <% end %>
+  </div>
+</div>
+</div>
+</div>
